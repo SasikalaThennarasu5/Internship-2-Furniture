@@ -50,7 +50,7 @@ console.log("Total Amount:", totalAmount);
 
     // Create order in backend
     const response = await fetch(
-      "http://127.0.0.1:8000/api/payments/create-order/",
+      "https://internship-2-furniture.onrender.com/api/payments/create-order/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ console.log("Total Amount:", totalAmount);
       description: "Order Payment",
       handler: async function (response) {
         await fetch(
-          "http://127.0.0.1:8000/api/payments/verify-payment/",
+          "https://internship-2-furniture.onrender.com/api/payments/verify-payment/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
