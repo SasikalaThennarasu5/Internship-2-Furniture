@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { getImageUrl } from "../utils/getImageUrl";
 
 function Furniture() {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,9 @@ function Furniture() {
   useEffect(() => {
   API.get("products/?category=furniture")
     .then((res) => {
-      setProducts(res.data);
+      // Ensure products is always an array
+      const list = Array.isArray(res.data) ? res.data : res.data.results || [];
+      setProducts(list);
     })
     .catch((err) => console.error(err));
 }, []);
@@ -33,14 +36,10 @@ function Furniture() {
               {/* PRODUCT IMAGE */}
               {product.images && product.images.length > 0 && (
                 <img
-                  src={
-                    product.images[0].image.startsWith("http")
-                      ? product.images[0].image
-                      : `http://127.0.0.1:8000${product.images[0].image}`
-                  }
-                  alt={product.name}
-                  className="mx-auto h-52 object-contain"
-                />
+  src={getImageUrl(product.images[0].image)}
+  alt={product.name}
+  className="mx-auto h-52 object-contain"
+/>
               )}
 
               <h3 className="mt-4 font-semibold">

@@ -1,3 +1,5 @@
+import { getImageUrl } from "../utils/getImageUrl";
+
 function HeroSection({ hero }) {
   if (!hero) return null;
 

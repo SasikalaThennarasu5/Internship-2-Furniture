@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import api from "../services/api";
+import { getImageUrl } from "../utils/getImageUrl";
 
 
 function BlogDetail() {

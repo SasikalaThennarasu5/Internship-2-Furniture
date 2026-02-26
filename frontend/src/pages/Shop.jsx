@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { useParams } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import api from "../services/api";
 import ProductCard from "../components/ProductCard";
 import HeroSection from "../components/HeroSection";
 import HomeCategorySection from "../components/HomeCategorySection";
-
 
 function Shop() {
   const { categorySlug } = useParams();
@@ -26,7 +25,10 @@ function Shop() {
   // Fetch categories
   useEffect(() => {
     api.get("categories/")
-      .then((res) => setCategories(res.data))
+      .then((res) => {
+        const list = Array.isArray(res.data) ? res.data : res.data.results || [];
+        setCategories(list);
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -35,7 +37,6 @@ function Shop() {
     setLoading(true);
 
     const params = [];
-
     if (categorySlug) params.push(`category=${categorySlug}`);
     if (searchTerm) params.push(`search=${searchTerm}`);
     if (price) params.push(`price=${price}`);
@@ -46,7 +47,11 @@ function Shop() {
     if (params.length > 0) url += "?" + params.join("&");
 
     api.get(url)
-      .then((res) => setProducts(res.data))
+      .then((res) => {
+        // Make sure products is always an array
+        const list = Array.isArray(res.data) ? res.data : res.data.results || [];
+        setProducts(list);
+      })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [categorySlug, searchTerm, price, material, colour]);
@@ -61,8 +66,9 @@ function Shop() {
 
     // Check subcategories
     for (let c of categories) {
-      let sub = c.subcategories.find((s) => s.slug === categorySlug);
-      if (sub) return sub.name;
+      const sub = c.subcategories || [];
+      let found = sub.find((s) => s.slug === categorySlug);
+      if (found) return found.name;
     }
 
     return "Products";
@@ -87,7 +93,6 @@ function Shop() {
 
         {/* Title + Search + Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-6">
-          {/* Left Side */}
           <div className="flex items-center gap-6 w-full md:w-auto">
             <h1 className="text-4xl font-bold text-gray-800">
               {selectedCategoryName}
@@ -150,11 +155,11 @@ function Shop() {
       <div className="bg-gray-100 px-20 py-16 min-h-screen">
         {loading ? (
           <div className="text-center text-xl">Loading...</div>
-        ) : products.length === 0 ? (
+        ) : (products || []).length === 0 ? (
           <div className="text-center text-xl">No products found.</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {products.map((product) => (
+            {(products || []).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

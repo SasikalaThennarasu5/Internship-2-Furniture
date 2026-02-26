@@ -10,6 +10,7 @@ import ServicesSection from "../components/ServicesSection";
 import HeroSection from "../components/HeroSection";
 import Material from "../components/Material";
 import Subscribe from "../components/Subscribe";
+import { getImageUrl } from "../utils/getImageUrl";
 
 
 function Home() {
@@ -35,20 +36,33 @@ function Home() {
   
 
      API.get("services/")
-  .then((res) => setServices(res.data))
+  .then((res) => {
+    const list = Array.isArray(res.data) ? res.data : res.data.results || [];
+    setServices(list);
+  })
   .catch((err) => console.error(err));
 
 API.get("testimonials/")
-  .then((res) => setTestimonials(res.data))
+  .then((res) => {
+    const list = Array.isArray(res.data) ? res.data : res.data.results || [];
+    setTestimonials(list);
+  })
   .catch((err) => console.error(err));
 
 
 API.get("why-choose-us/")
-  .then((res) => setWhyChoose(res.data))
+  .then((res) => {
+    // ensure whyChoose is always an array
+    const items = Array.isArray(res.data) ? res.data : res.data.results || [];
+    setWhyChoose(items);
+  })
   .catch((err) => console.error(err));
 
 API.get("blogs/")
-  .then((res) => setBlogs(res.data.slice(0, 3)))
+  .then((res) => {
+    const blogList = Array.isArray(res.data) ? res.data : res.data.results || [];
+    setBlogs(blogList.slice(0, 3));
+  })
   .catch((err) => console.error(err));
 }, []);
 
