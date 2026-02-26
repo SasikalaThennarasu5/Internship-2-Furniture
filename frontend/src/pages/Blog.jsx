@@ -46,13 +46,10 @@ function Blog() {
             >
               
               <img
-                src={
-                  blog.thumbnail?.startsWith("http")
-                  ? blog.thumbnail
-                  : `http://127.0.0.1:8000${blog.thumbnail}`}
-                alt={blog.title}
-                className="w-full h-56 object-cover"
-              />
+  src={getImageUrl(blog.thumbnail)}
+  alt={blog.title}
+  className="w-full h-56 object-cover"
+/>
 
               <div className="p-4">
                 <h3 className="font-semibold text-lg">

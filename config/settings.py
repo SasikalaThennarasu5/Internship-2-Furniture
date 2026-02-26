@@ -182,8 +182,8 @@ DJ_REST_AUTH = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = "http://localhost:5173/"
-LOGOUT_REDIRECT_URL = "http://localhost:5173/"
+LOGIN_REDIRECT_URL = "https://internship-2-furniture.vercel.app/"
+LOGOUT_REDIRECT_URL = "https://internship-2-furniture.vercel.app/"
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'

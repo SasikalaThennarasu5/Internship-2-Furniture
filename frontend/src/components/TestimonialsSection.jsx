@@ -32,15 +32,13 @@ function TestimonialsSection({ data }) {
 
         {/* Image */}
         <div className="flex justify-center mb-6">
-          <img
-            src={
-              testimonial.image?.startsWith("http")
-                ? testimonial.image
-                : `http://127.0.0.1:8000${testimonial.image}`
-            }
-            alt={testimonial.name}
-            className="w-24 h-24 rounded-full object-cover"
-          />
+          <div className="flex justify-center mb-6">
+  <img
+    src={getImageUrl(testimonial.image)}
+    alt={testimonial.name}
+    className="w-24 h-24 rounded-full object-cover"
+  />
+</div>
         </div>
 
         {/* Name */}

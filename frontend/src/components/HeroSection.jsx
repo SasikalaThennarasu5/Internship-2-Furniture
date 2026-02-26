@@ -7,6 +7,11 @@ function HeroSection({ hero }) {
   if (hero.background_image?.startsWith("/media")) {
     imageUrl = `http://127.0.0.1:8000${hero.background_image}`;
   }
+  <img
+  src={getImageUrl(hero.background_image)}
+  alt="Hero Background"
+  className="w-full h-full object-cover"
+/>
 
   return (
     <div

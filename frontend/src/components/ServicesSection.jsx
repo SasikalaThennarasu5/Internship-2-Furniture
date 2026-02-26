@@ -5,14 +5,10 @@ function ServicesSection({ data }) {
         {data.map((service) => (
           <div key={service.id}>
             <img
-              src={
-                service.icon?.startsWith("http")
-                  ? service.icon
-                  : `http://127.0.0.1:8000${service.icon}`
-              }
-              alt={service.title}
-              className="h-10 mb-6"
-            />
+  src={getImageUrl(service.icon)}
+  alt={service.title}
+  className="h-10 mb-6"
+/>
 
             <h3 className="font-semibold text-lg mb-3">
               {service.title}

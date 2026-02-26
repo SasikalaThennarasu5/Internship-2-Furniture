@@ -19,14 +19,10 @@ function WhyChooseUs({ data, subtitle }) {
             {data.map((item) => (
               <div key={item.id} className="flex gap-4">
                 <img
-                  src={
-                    item.icon?.startsWith("http")
-                      ? item.icon
-                      : `http://127.0.0.1:8000${item.icon}`
-                  }
-                  alt={item.title}
-                  className="h-10 w-10 object-contain"
-                />
+  src={getImageUrl(item.icon)}
+  alt={item.title}
+  className="h-10 w-10 object-contain"
+/>
 
                 <div>
                   <h3 className="font-semibold text-lg">
