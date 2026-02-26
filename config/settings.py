@@ -27,7 +27,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["internship-2-furniture.onrender.com",]
+ALLOWED_HOSTS = "internship-2-furniture.onrender.com",
+    "127.0.0.1",
+    "localhost",
 
 
 
