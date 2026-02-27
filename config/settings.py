@@ -30,7 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "https://internship-2-furniture.onrender.com",
+    "internship-2-furniture.onrender.com",
+    ".onrender.com",   # allows all render subdomains
 ]
 
 CSRF_TRUSTED_ORIGINS = [
