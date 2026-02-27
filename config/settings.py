@@ -30,11 +30,11 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    ".onrender.com",
+    "https://internship-2-furniture.onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.onrender.com",
+    "https://internship-2-furniture.onrender.com",
     "https://internship-2-furniture.vercel.app",
 ]
 
@@ -73,7 +73,7 @@ SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://internship-2-furniture.vercel.app",
+    "https://internship-2-furniture.vercel.app/"
 ]
 
 MIDDLEWARE = [
