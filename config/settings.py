@@ -27,12 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "internship-2-furniture.onrender.com",
-    ".onrender.com",   # allows all render subdomains
-]
+ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://internship-2-furniture.vercel.app",
