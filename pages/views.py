@@ -142,7 +142,7 @@ class AboutAPIView(APIView):
     def create_admin():
          if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser(
-                username="admin",
+                username="admin1",
                 email="admin@gmail.com",
-                password="admin123"
+                password="admin1234"
         )
