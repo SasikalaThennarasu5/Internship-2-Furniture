@@ -51,12 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Third Party
-    
     'corsheaders',
-
-    # Local Apps
     'users',
     'products',
     'orders',
@@ -67,14 +62,15 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
-   "https://internship-2-furniture.vercel.app"
+   "https://internship-2-furniture.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
-    'allauth.account.middleware.AccountMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
