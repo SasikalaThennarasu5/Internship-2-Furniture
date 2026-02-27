@@ -5,28 +5,20 @@ import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import Subscribe from "../components/Subscribe";
-import { getImageUrl } from "../utils/getImageUrl";
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-  API.get("blogs/")
-    .then((res) => {
-      // Ensure blogs is always an array
-      const blogList = Array.isArray(res.data) ? res.data : res.data.results || [];
-      setBlogs(blogList);
-    })
-    .catch((err) => console.error(err));
+    API.get("blogs/")
+      .then((res) => setBlogs(res.data))
+      .catch((err) => console.error(err));
 
-  API.get("testimonials/")
-    .then((res) => {
-      const testimonialList = Array.isArray(res.data) ? res.data : res.data.results || [];
-      setTestimonials(testimonialList);
-    })
-    .catch((err) => console.error(err));
-}, []);
+    API.get("testimonials/")
+      .then((res) => setTestimonials(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <MainLayout>
@@ -54,10 +46,13 @@ function Blog() {
             >
               
               <img
-  src={getImageUrl(blog.thumbnail)}
-  alt={blog.title}
-  className="w-full h-56 object-cover"
-/>
+                src={
+                  blog.thumbnail?.startsWith("http")
+                  ? blog.thumbnail
+                  : `http://127.0.0.1:8000${blog.thumbnail}`}
+                alt={blog.title}
+                className="w-full h-56 object-cover"
+              />
 
               <div className="p-4">
                 <h3 className="font-semibold text-lg">

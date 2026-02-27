@@ -25,13 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    "internship-2-furniture.onrender.com",
-    "127.0.0.1",
-    "localhost",
-]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 
@@ -69,16 +65,12 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
-    "https://internship-2-furniture.vercel.app",
-    "http://localhost:5174",
+    "http://localhost:5173",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -169,7 +161,7 @@ SIMPLE_JWT = {
 }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -185,8 +177,8 @@ DJ_REST_AUTH = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = "https://internship-2-furniture.vercel.app/"
-LOGOUT_REDIRECT_URL = "https://internship-2-furniture.vercel.app/"
+LOGIN_REDIRECT_URL = "http://localhost:5173/"
+LOGOUT_REDIRECT_URL = "http://localhost:5173/"
 
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'

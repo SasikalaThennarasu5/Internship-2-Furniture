@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import axios from "axios";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 function Footer() {
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
-    API
-  .get("site-settings/")
+    axios
+      .get("http://127.0.0.1:8000/api/site-settings/")
       .then((res) => setSettings(res.data))
       .catch((err) => console.error(err));
   }, []);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import api from "../services/api";
 import { Link } from "react-router-dom";
 
 function HomeCategorySection() {
@@ -7,12 +7,9 @@ function HomeCategorySection() {
   
 
   useEffect(() => {
-    API.get("categories/")
-  .then((res) => {
-    const list = Array.isArray(res.data) ? res.data : res.data.results || [];
-    setCategories(list);
-  })
-  .catch((err) => console.error(err));
+    api.get("categories/")
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
