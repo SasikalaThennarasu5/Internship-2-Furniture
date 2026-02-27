@@ -34,7 +34,6 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://internship-2-furniture.onrender.com",
     "https://internship-2-furniture.vercel.app",
 ]
 
@@ -72,9 +71,10 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://internship-2-furniture.vercel.app"
+   "https://internship-2-furniture.vercel.app"
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
