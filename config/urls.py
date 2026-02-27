@@ -3,7 +3,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import home, GoogleLogin
-
+from pages.views import create_admin
+create_admin()
 
 urlpatterns = [
     path('', home),
