@@ -139,10 +139,4 @@ class AboutAPIView(APIView):
         serializer = AboutPageSerializer(about)
         return Response(serializer.data)
     
-    def create_admin():
-         if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser(
-                username="admin1",
-                email="admin@gmail.com",
-                password="admin1234"
-        )
+    

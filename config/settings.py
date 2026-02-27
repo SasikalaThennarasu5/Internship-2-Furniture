@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'orders',
     'pages',
     'payments',
-    'pages.apps.HomeConfig',
+    
 ]
 
 SITE_ID = 1
