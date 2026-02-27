@@ -70,7 +70,10 @@ SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
     "https://internship-2-furniture.vercel.app",
+    "http://localhost:5174",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

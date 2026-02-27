@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
 import API from "../services/api";
@@ -12,7 +11,6 @@ import Material from "../components/Material";
 import Subscribe from "../components/Subscribe";
 import { getImageUrl } from "../utils/getImageUrl";
 
-
 function Home() {
   const [homeData, setHomeData] = useState(null);
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -21,128 +19,109 @@ function Home() {
   const [whyChoose, setWhyChoose] = useState([]);
   const [blogs, setBlogs] = useState([]);
 
+  const [loadingHome, setLoadingHome] = useState(true);
+
   useEffect(() => {
-    API.get("home/")
-      .then((res) => {
-        setHomeData(res.data);
-      })
-      .catch((err) => console.error(err));
+    const fetchData = async () => {
+      try {
+        // HOME DATA
+        const homeRes = await API.get("home/");
+        setHomeData(homeRes.data);
 
-    API.get("products/?featured=true")
-      .then((res) => {
-        setFeaturedProducts(res.data);
-      })
-      .catch((err) => console.error(err));
-  
+        // FEATURED PRODUCTS
+        const productsRes = await API.get("products/?featured=true");
+        setFeaturedProducts(Array.isArray(productsRes.data) ? productsRes.data : productsRes.data.results || []);
 
-     API.get("services/")
-  .then((res) => {
-    const list = Array.isArray(res.data) ? res.data : res.data.results || [];
-    setServices(list);
-  })
-  .catch((err) => console.error(err));
+        // SERVICES
+        const servicesRes = await API.get("services/");
+        setServices(Array.isArray(servicesRes.data) ? servicesRes.data : servicesRes.data.results || []);
 
-API.get("testimonials/")
-  .then((res) => {
-    const list = Array.isArray(res.data) ? res.data : res.data.results || [];
-    setTestimonials(list);
-  })
-  .catch((err) => console.error(err));
+        // TESTIMONIALS
+        const testimonialsRes = await API.get("testimonials/");
+        setTestimonials(Array.isArray(testimonialsRes.data) ? testimonialsRes.data : testimonialsRes.data.results || []);
 
+        // WHY CHOOSE US
+        const whyRes = await API.get("why-choose-us/");
+        setWhyChoose(Array.isArray(whyRes.data) ? whyRes.data : whyRes.data.results || []);
 
-API.get("why-choose-us/")
-  .then((res) => {
-    // ensure whyChoose is always an array
-    const items = Array.isArray(res.data) ? res.data : res.data.results || [];
-    setWhyChoose(items);
-  })
-  .catch((err) => console.error(err));
+        // BLOGS
+        const blogsRes = await API.get("blogs/");
+        const blogList = Array.isArray(blogsRes.data) ? blogsRes.data : blogsRes.data.results || [];
+        setBlogs(blogList.slice(0, 3));
 
-API.get("blogs/")
-  .then((res) => {
-    const blogList = Array.isArray(res.data) ? res.data : res.data.results || [];
-    setBlogs(blogList.slice(0, 3));
-  })
-  .catch((err) => console.error(err));
-}, []);
+      } catch (error) {
+        console.error("Error fetching Home data:", error);
+      } finally {
+        setLoadingHome(false);
+      }
+    };
 
+    fetchData();
+  }, []);
 
+  if (loadingHome) {
+    return (
+      <MainLayout>
+        <div className="text-center mt-20 text-xl">Loading...</div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
-      {!homeData ? (
-        <div className="text-center mt-20 text-xl">Loading...</div>
-      ) : (
-        <div>
-          {/* HERO SECTION */}
-          <HeroSection hero={homeData?.hero} />
-          
-          
-<HomeCategorySection />
+      {/* HERO SECTION */}
+      {homeData?.hero && <HeroSection hero={homeData.hero} />}
 
-          {/* FEATURED PRODUCTS */}
-         <Material />
+      {/* CATEGORY SECTION */}
+      <HomeCategorySection />
 
-          {/* WHY CHOOSE US */}
-<WhyChooseUs data={whyChoose} />
+      {/* FEATURED PRODUCTS */}
+      {featuredProducts.length > 0 && <Material products={featuredProducts} />}
 
-{/* SERVICES */}
-<ServicesSection data={services} />
+      {/* WHY CHOOSE US */}
+      {whyChoose.length > 0 && <WhyChooseUs data={whyChoose} />}
 
-{/* TESTIMONIALS */}
-<TestimonialsSection data={testimonials} />
+      {/* SERVICES */}
+      {services.length > 0 && <ServicesSection data={services} />}
 
-{/* RECENT BLOGS */}
-<div className="px-20 py-24 bg-gray-100">
+      {/* TESTIMONIALS */}
+      {testimonials.length > 0 && <TestimonialsSection data={testimonials} />}
 
-  {/* Header Row */}
-  <div className="flex justify-between items-center mb-12">
-    <h2 className="text-4xl font-bold">
-      Recent Blog
-    </h2>
+      {/* RECENT BLOGS */}
+      {blogs.length > 0 && (
+        <div className="px-20 py-24 bg-gray-100">
+          <div className="flex justify-between items-center mb-12">
+            <h2 className="text-4xl font-bold">Recent Blog</h2>
+            <Link
+              to="/blogs"
+              className="text-sm font-medium underline hover:text-gray-600 transition"
+            >
+              View All Posts
+            </Link>
+          </div>
 
-    <Link
-      to="/blogs"
-      className="text-sm font-medium underline hover:text-gray-600 transition"
-    >
-      View All Posts
-    </Link>
-  </div>
-
-  {/* Blog Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-    {blogs.map((blog) => (
-      <Link
-        key={blog.id}
-        to={`/blog/${blog.slug}`}
-        className="group block"
-      >
-        {/* Image */}
-        <img
-  src={getImageUrl(blog.thumbnail)}
-  alt={blog.title}
-  className="w-full h-64 object-cover rounded-2xl mb-6 group-hover:scale-105 transition duration-300"
-/>
-
-        {/* Title */}
-        <h3 className="font-semibold text-lg mb-2">
-          {blog.title}
-        </h3>
-
-        {/* Author + Date */}
-        <p className="text-sm text-gray-500">
-          by {blog.author_name} on{" "}
-          {new Date(blog.created_at).toLocaleDateString()}
-        </p>
-      </Link>
-    ))}
-  </div>
-
-</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {blogs.map((blog) => (
+              <Link
+                key={blog.id}
+                to={`/blog/${blog.slug}`}
+                className="group block"
+              >
+                <img
+                  src={getImageUrl(blog.thumbnail)}
+                  alt={blog.title}
+                  className="w-full h-64 object-cover rounded-2xl mb-6 group-hover:scale-105 transition duration-300"
+                />
+                <h3 className="font-semibold text-lg mb-2">{blog.title}</h3>
+                <p className="text-sm text-gray-500">
+                  by {blog.author_name} on {new Date(blog.created_at).toLocaleDateString()}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
-        
-        
       )}
+
       <Subscribe />
     </MainLayout>
   );
