@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import HomeAPIView, BlogListView, BlogDetailView, AddCommentView, TestimonialListView, WhyChooseUsListView, ServiceListView, TeamMemberListView, NewsletterSubscribeView, ContactMessageCreateView, SiteSettingsView, AboutAPIView
 
+
 urlpatterns = [
     path('home/', HomeAPIView.as_view(), name='home'),
     path("blogs/", BlogListView.as_view(), name="blog-list"),
@@ -14,4 +15,5 @@ urlpatterns = [
     path("contact/", ContactMessageCreateView.as_view(), name="contact-message"),
     path("site-settings/", SiteSettingsView.as_view(), name="site-settings"),
     path("about/", AboutAPIView.as_view(), name="about"),
+   
 ]

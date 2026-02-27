@@ -3,6 +3,7 @@ from rest_framework import status, generics, permissions
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView
+from django.contrib.auth.models import User
 
 from .models import (
     HeroSection, WhyChooseUs, Testimonial, Footer,
@@ -137,3 +138,11 @@ class AboutAPIView(APIView):
         about = AboutPage.objects.first()
         serializer = AboutPageSerializer(about)
         return Response(serializer.data)
+    
+    def create_admin():
+         if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser(
+                username="admin",
+                email="admin@gmail.com",
+                password="admin123"
+        )
