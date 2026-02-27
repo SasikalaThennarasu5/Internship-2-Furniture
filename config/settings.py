@@ -73,7 +73,7 @@ SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://internship-2-furniture.vercel.app/"
+    "https://internship-2-furniture.vercel.app"
 ]
 
 MIDDLEWARE = [
