@@ -1,5 +1,5 @@
 function WhyChooseUs({ data, subtitle }) {
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
   return (
     <div className="px-20 py-20 bg-gray-100">
@@ -22,7 +22,7 @@ function WhyChooseUs({ data, subtitle }) {
               const iconUrl =
                 item.icon?.startsWith("http")
                   ? item.icon
-                  : `${API_BASE}${item.icon}`;
+                  : `${api_BASE}${item.icon}`;
 
               return (
                 <div key={item.id} className="flex gap-4">

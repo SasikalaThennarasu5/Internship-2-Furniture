@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import API from "../services/api";
+import api from "../services/api";
 import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ServicesSection from "../components/ServicesSection";
@@ -13,15 +13,15 @@ function Services() {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    API.get("services/")
+    api.get("services/")
       .then((res) => setServices(res.data))
       .catch((err) => console.error(err));
 
-    API.get("products/")
+    api.get("products/")
       .then((res) => setProducts(res.data.slice(0, 3)))
       .catch((err) => console.error(err));
 
-    API.get("testimonials/")
+    api.get("testimonials/")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error(err));
   }, []);

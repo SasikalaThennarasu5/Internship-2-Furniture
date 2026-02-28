@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 function Footer() {
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
   axios
-    .get(`${API}/api/site-settings/`)
+    .get(`${api}/api/site-settings/`)
     .then((res) => setSettings(res.data))
     .catch((err) => console.error(err));
 }, []);

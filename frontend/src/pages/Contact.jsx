@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import API from "../services/api";
+import api from "../services/api";
 import HeroSection from "../components/HeroSection";
 import Subscribe from "../components/Subscribe";
 
@@ -28,7 +28,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      await API.post("contact/", formData);
+      await api.post("contact/", formData);
       setSuccess(true);
       setFormData({
         first_name: "",

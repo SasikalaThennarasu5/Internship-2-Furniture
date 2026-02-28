@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import API from "../services/api";
+import api from "../services/api";
 import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
 
@@ -16,14 +16,14 @@ function ProductDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    API.get(`products/${slug}/`)
+    api.get(`products/${slug}/`)
       .then((res) => {
         setProduct(res.data);
         setSelectedImage(res.data.images?.[0]?.image);
 
         // Fetch related products (same category)
         if (res.data.category?.slug) {
-          API.get(`products/?category=${res.data.category.slug}`)
+          api.get(`products/?category=${res.data.category.slug}`)
             .then((relatedRes) => {
               const filtered = relatedRes.data.filter(
                 (item) => item.slug !== res.data.slug

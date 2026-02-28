@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function TestimonialsSection({ data }) {
   const [current, setCurrent] = useState(0);
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
   useEffect(() => {
     if (!data || data.length === 0) return;
@@ -21,7 +21,7 @@ function TestimonialsSection({ data }) {
   const imageUrl =
     testimonial.image?.startsWith("http")
       ? testimonial.image
-      : `${API_BASE}${testimonial.image}`;
+      : `${api_BASE}${testimonial.image}`;
 
   return (
     <div className="px-20 py-24 bg-gray-100 text-center">

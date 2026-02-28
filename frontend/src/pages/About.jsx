@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import API from "../services/api";
+import api from "../services/api";
 import HeroSection from "../components/HeroSection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import TestimonialsSection from "../components/TestimonialsSection";
@@ -14,19 +14,19 @@ function About() {
   const [whyChoose, setWhyChoose] = useState([]);
 
   useEffect(() => {
-    API.get("about/")
+    api.get("about/")
       .then((res) => setAboutData(res.data))
       .catch((err) => console.error(err));
 
-    API.get("team-members/")
+    api.get("team-members/")
       .then((res) => setTeam(res.data))
       .catch((err) => console.error(err));
 
-    API.get("testimonials/")
+    api.get("testimonials/")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error(err));
 
-    API.get("why-choose-us/")
+    api.get("why-choose-us/")
       .then((res) => setWhyChoose(res.data))
       .catch((err) => console.error(err));
   }, []);

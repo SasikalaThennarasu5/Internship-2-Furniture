@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API = axios.create({
+const api = axios.create({
   baseURL: "https://internship-2-furniture-1.onrender.com/api/",
 });
 
-API.interceptors.request.use((config) => {
+api.interceptors.request.use((config) => {
   const token = localStorage.getItem("access");
 
   if (token) {
@@ -14,7 +14,7 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-API.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
@@ -25,4 +25,4 @@ API.interceptors.response.use(
   }
 );
 
-export default API;
+export default api;

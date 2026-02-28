@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import API from "../services/api";
+import api from "../services/api";
 
 function CategoryTabs() {
   const [categories, setCategories] = useState([]);
   const { categorySlug } = useParams();
 
   useEffect(() => {
-    API.get("categories/")
+    api.get("categories/")
       .then((res) => setCategories(res.data))
       .catch((err) => console.error(err));
   }, []);

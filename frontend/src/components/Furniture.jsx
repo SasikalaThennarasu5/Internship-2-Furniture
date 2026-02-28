@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import API from "../services/api";
+import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
 function Furniture() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    API.get("products/?category=furniture")
+    api.get("products/?category=furniture")
       .then((res) => {
         setProducts(res.data);
       })
@@ -26,7 +26,7 @@ function Furniture() {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return "";
     if (imagePath.startsWith("http")) return imagePath;
-    return `${API_BASE}${imagePath}`;
+    return `${api_BASE}${imagePath}`;
   };
 
   return (

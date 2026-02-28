@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import API from "../services/api";
+import api from "../services/api";
 import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
@@ -13,11 +13,11 @@ function Blog() {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    API.get("blogs/")
+    api.get("blogs/")
       .then((res) => setBlogs(res.data))
       .catch((err) => console.error(err));
 
-    API.get("testimonials/")
+    api.get("testimonials/")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error(err));
   }, []);

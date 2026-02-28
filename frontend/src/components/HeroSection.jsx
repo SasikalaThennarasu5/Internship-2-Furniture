@@ -1,12 +1,12 @@
 function HeroSection({ hero }) {
   if (!hero) return null;
 
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
   let imageUrl = hero.background_image;
 
   if (hero.background_image?.startsWith("/media")) {
-    imageUrl = `${API_BASE}${hero.background_image}`;
+    imageUrl = `${api_BASE}${hero.background_image}`;
   }
 
   return (

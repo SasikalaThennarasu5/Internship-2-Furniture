@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import MainLayout from "../layout/MainLayout";
-import API from "../services/api";
+import api from "../services/api";
 import { Link } from "react-router-dom";
 import HomeCategorySection from "../components/HomeCategorySection";
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -22,33 +22,33 @@ function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    API.get("home/")
+    api.get("home/")
       .then((res) => {
         setHomeData(res.data);
       })
       .catch((err) => console.error(err));
 
-    API.get("products/?featured=true")
+    api.get("products/?featured=true")
       .then((res) => {
         setFeaturedProducts(res.data);
       })
       .catch((err) => console.error(err));
   
 
-     API.get("services/")
+     api.get("services/")
   .then((res) => setServices(res.data))
   .catch((err) => console.error(err));
 
-API.get("testimonials/")
+api.get("testimonials/")
   .then((res) => setTestimonials(res.data))
   .catch((err) => console.error(err));
 
 
-API.get("why-choose-us/")
+api.get("why-choose-us/")
   .then((res) => setWhyChoose(res.data))
   .catch((err) => console.error(err));
 
-API.get("blogs/")
+api.get("blogs/")
   .then((res) => setBlogs(res.data.slice(0, 3)))
   .catch((err) => console.error(err));
 }, []);

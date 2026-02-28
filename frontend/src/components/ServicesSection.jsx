@@ -1,5 +1,5 @@
 function ServicesSection({ data }) {
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
 
   return (
     <div className="px-20 py-24 bg-gray-100">
@@ -8,7 +8,7 @@ function ServicesSection({ data }) {
           const iconUrl =
             service.icon?.startsWith("http")
               ? service.icon
-              : `${API_BASE}${service.icon}`;
+              : `${api_BASE}${service.icon}`;
 
           return (
             <div key={service.id}>
