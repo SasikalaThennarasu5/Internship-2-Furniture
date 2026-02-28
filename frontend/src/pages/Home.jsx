@@ -10,6 +10,7 @@ import ServicesSection from "../components/ServicesSection";
 import HeroSection from "../components/HeroSection";
 import Material from "../components/Material";
 import Subscribe from "../components/Subscribe";
+import { getImageUrl } from "../utils/getImageUrl";
 
 
 function Home() {
@@ -105,11 +106,7 @@ API.get("blogs/")
       >
         {/* Image */}
         <img
-          src={
-            blog.thumbnail?.startsWith("http")
-              ? blog.thumbnail
-              : `http://127.0.0.1:8000${blog.thumbnail}`
-          }
+          src={getImageUrl(blog.thumbnail)}
           alt={blog.title}
           className="w-full h-64 object-cover rounded-2xl mb-6 group-hover:scale-105 transition duration-300"
         />

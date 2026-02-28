@@ -5,6 +5,7 @@ import API from "../services/api";
 import HeroSection from "../components/HeroSection";
 import WhyChooseUs from "../components/WhyChooseUs";
 import TestimonialsSection from "../components/TestimonialsSection";
+import { getImageUrl } from "../utils/getImageUrl";
 
 function About() {
   const [aboutData, setAboutData] = useState(null);
@@ -69,11 +70,7 @@ function About() {
         {/* IMAGE */}
         <div className="overflow-hidden rounded-2xl">
           <img
-            src={
-              member.image?.startsWith("http")
-                ? member.image
-                : `http://127.0.0.1:8000${member.image}`
-            }
+            src={getImageUrl(member.image)}
             alt={member.name}
             className="w-full h-72 object-cover"
           />

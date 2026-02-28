@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import Subscribe from "../components/Subscribe";
+import { getImageUrl } from "../utils/getImageUrl";
+
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
@@ -46,10 +48,7 @@ function Blog() {
             >
               
               <img
-                src={
-                  blog.thumbnail?.startsWith("http")
-                  ? blog.thumbnail
-                  : `http://127.0.0.1:8000${blog.thumbnail}`}
+                src={getImageUrl(blog.thumbnail)}
                 alt={blog.title}
                 className="w-full h-56 object-cover"
               />

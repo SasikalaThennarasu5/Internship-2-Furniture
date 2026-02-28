@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import api from "../services/api";
-
+import { getImageUrl } from "../utils/getImageUrl";
 
 function BlogDetail() {
   const { slug } = useParams();
@@ -55,7 +55,7 @@ function BlogDetail() {
       <div className="px-20 py-16 max-w-4xl mx-auto">
         {/* Blog Image */}
         <img
-          src={`http://127.0.0.1:8000${blog.thumbnail}`}
+          src={getImageUrl(blog.thumbnail)}
           alt={blog.title}
           className="w-full h-96 object-cover rounded-lg mb-8"
         />
