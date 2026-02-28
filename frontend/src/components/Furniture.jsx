@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+const API = import.meta.env.VITE_API_BASE_URL;
 
 function Furniture() {
   const [products, setProducts] = useState([]);
@@ -33,14 +34,14 @@ function Furniture() {
               {/* PRODUCT IMAGE */}
               {product.images && product.images.length > 0 && (
                 <img
-                  src={
-                    product.images[0].image.startsWith("http")
-                      ? product.images[0].image
-                      : `http://127.0.0.1:8000${product.images[0].image}`
-                  }
-                  alt={product.name}
-                  className="mx-auto h-52 object-contain"
-                />
+  src={
+    product.images[0].image.startsWith("http")
+      ? product.images[0].image
+      : `${API_BASE}${product.images[0].image}`
+  }
+  alt={product.name}
+  className="mx-auto h-52 object-contain"
+/>
               )}
 
               <h3 className="mt-4 font-semibold">
