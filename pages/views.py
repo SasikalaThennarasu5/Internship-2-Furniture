@@ -144,6 +144,7 @@ class AboutAPIView(APIView):
 def create_admin():
     try:
         User = get_user_model()
+        
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser(
                 username="admin",
