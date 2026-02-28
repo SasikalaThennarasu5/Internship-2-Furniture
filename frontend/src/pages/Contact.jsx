@@ -28,7 +28,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      await api.post("contact/", formData);
+      await API.post("contact/", formData);
       setSuccess(true);
       setFormData({
         first_name: "",

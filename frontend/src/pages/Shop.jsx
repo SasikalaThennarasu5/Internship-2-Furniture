@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
-import api from "../services/api";
+import API from "../services/api";
 import ProductCard from "../components/ProductCard";
 import HeroSection from "../components/HeroSection";
 import HomeCategorySection from "../components/HomeCategorySection";
@@ -25,7 +25,7 @@ function Shop() {
 
   // Fetch categories
   useEffect(() => {
-    api.get("categories/")
+    API.get("categories/")
       .then((res) => setCategories(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -45,7 +45,7 @@ function Shop() {
     let url = "products/";
     if (params.length > 0) url += "?" + params.join("&");
 
-    api.get(url)
+    API.get(url)
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
