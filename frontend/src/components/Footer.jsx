@@ -8,7 +8,7 @@ function Footer() {
 
   useEffect(() => {
   api
-    .get("/api/site-settings/")
+    .get("site-settings/")   // ✅ NO /api/ here
     .then((res) => setSettings(res.data))
     .catch((err) => console.error(err));
 }, []);
