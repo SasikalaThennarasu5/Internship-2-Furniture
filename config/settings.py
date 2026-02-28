@@ -66,7 +66,7 @@ SITE_ID = 1
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    "https://internship-2-furniture-1.vercel.app",
+    "https://internship-2-furniture.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
