@@ -1,4 +1,6 @@
 function WhyChooseUs({ data, subtitle }) {
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   return (
     <div className="px-20 py-20 bg-gray-100">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -16,32 +18,35 @@ function WhyChooseUs({ data, subtitle }) {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {data.map((item) => (
-              <div key={item.id} className="flex gap-4">
-                <img
-                  src={
-                    item.icon?.startsWith("http")
-                      ? item.icon
-                      : `http://127.0.0.1:8000${item.icon}`
-                  }
-                  alt={item.title}
-                  className="h-10 w-10 object-contain"
-                />
+            {data.map((item) => {
+              const iconUrl =
+                item.icon?.startsWith("http")
+                  ? item.icon
+                  : `${API_BASE}${item.icon}`;
 
-                <div>
-                  <h3 className="font-semibold text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mt-2">
-                    {item.description}
-                  </p>
+              return (
+                <div key={item.id} className="flex gap-4">
+                  <img
+                    src={iconUrl}
+                    alt={item.title}
+                    className="h-10 w-10 object-contain"
+                  />
+
+                  <div>
+                    <h3 className="font-semibold text-lg">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mt-2">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* RIGHT SIDE HARDCODED IMAGE */}
+        {/* RIGHT SIDE STATIC IMAGE */}
         <div>
           <img
             src="/images/whychoose.png"
