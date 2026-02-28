@@ -1,11 +1,12 @@
 function HeroSection({ hero }) {
   if (!hero) return null;
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   let imageUrl = hero.background_image;
 
-  // If image starts with /media → Django
   if (hero.background_image?.startsWith("/media")) {
-    imageUrl = `http://127.0.0.1:8000${hero.background_image}`;
+    imageUrl = `${API_BASE}${hero.background_image}`;
   }
 
   return (
@@ -15,7 +16,7 @@ function HeroSection({ hero }) {
         backgroundImage: `url(${imageUrl})`,
       }}
     >
-      <div className=" p-8 rounded text-white max-w-2xl">
+      <div className="p-8 rounded text-white max-w-2xl">
         <h1 className="text-4xl font-bold">{hero.title}</h1>
 
         {hero.subtitle && (
