@@ -6,11 +6,13 @@ function Footer() {
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/site-settings/")
-      .then((res) => setSettings(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  const API = import.meta.env.VITE_API_BASE_URL;
+
+  axios
+    .get(`${API}/api/site-settings/`)
+    .then((res) => setSettings(res.data))
+    .catch((err) => console.error(err));
+}, []);
 
   if (!settings) return null;
 
