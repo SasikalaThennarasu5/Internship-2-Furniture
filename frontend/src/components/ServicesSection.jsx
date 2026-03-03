@@ -1,14 +1,14 @@
 function ServicesSection({ data }) {
 
   const serviceIcons = [
-    "/images/services1.png",
-    "/images/services2.png",
-    "/images/services3.png",
-    "/images/services4.png",
-    "/images/services5.png",
-    "/images/services6.png",
-    "/images/services7.png",
-    "/images/services8.png",
+    "/images/services/services1.png",
+    "/images/services/services2.png",
+    "/images/services/services3.png",
+    "/images/services/services4.png",
+    "/images/services/services5.png",
+    "/images/services/services6.png",
+    "/images/services/services7.png",
+    "/images/services/services8.png",
   ];
 
   return (
