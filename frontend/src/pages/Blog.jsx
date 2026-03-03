@@ -11,12 +11,12 @@ function Blog() {
   const [testimonials, setTestimonials] = useState([]);
 
   const blogImages = [
-    "public/images/blogs/blog1.png",
-    "public/images/blogs/blog2.png",
-    "public/images/blogs/blog3.png",
-    "public/images/blogs/blog4.png",
-    "public/images/blogs/blog5.png",
-    "public/images/blogs/blog1.png",
+    "public/images/blog/blog1.png",
+    "public/images/blog/blog2.png",
+    "public/images/blog/blog3.png",
+    "public/images/blog/blog4.png",
+    "public/images/blog/blog5.png",
+    "public/images/blog/blog1.png",
   ];
 
   useEffect(() => {
