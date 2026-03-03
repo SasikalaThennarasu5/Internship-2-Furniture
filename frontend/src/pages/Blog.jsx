@@ -5,12 +5,18 @@ import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import Subscribe from "../components/Subscribe";
-import { getImageUrl } from "../utils/getImageUrl";
-
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+
+  const blogImages = [
+    "/images/blog/blog1.png",
+    "/images/blog/blog2.png",
+    "/images/blog/blog3.png",
+    "/images/blog/blog4.png",
+    "/images/blog/blog5.png",
+  ];
 
   useEffect(() => {
     api.get("blogs/")
@@ -27,28 +33,24 @@ function Blog() {
 
       {/* HERO SECTION */}
       <HeroSection
-      hero={{
-    title: "Our Blog",
-    subtitle: "Latest trends and updates",
-    background_image: "/images/shop-banner.png",
-    button1_text: "Contact Us",
-    button2_text: "Our Services",
-  }}
-  
-/>
+        hero={{
+          title: "Our Blog",
+          subtitle: "Latest trends and updates",
+        }}
+      />
 
       {/* BLOG GRID */}
       <div className="px-20 py-16">
-        <div className="grid grid-cols-3 gap-8">
-          {blogs.map((blog) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog, index) => (
             <Link
               key={blog.id}
               to={`/blog/${blog.slug}`}
               className="border rounded-lg overflow-hidden hover:shadow-lg transition"
             >
-              
+
               <img
-                src={getImageUrl(blog.thumbnail)}
+                src={blogImages[index]}
                 alt={blog.title}
                 className="w-full h-56 object-cover"
               />
@@ -71,7 +73,6 @@ function Blog() {
         </div>
       </div>
 
-      {/* TESTIMONIALS SECTION */}
       <TestimonialsSection data={testimonials} />
       <Subscribe />
 
