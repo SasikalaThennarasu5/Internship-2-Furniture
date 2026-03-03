@@ -26,12 +26,19 @@ function Furniture() {
   const getImageUrl = (imagePath) => {
   if (!imagePath) return "";
 
+  // If already full URL (Cloudinary etc.)
   if (imagePath.startsWith("http")) {
     return imagePath;
   }
 
-  return `${import.meta.env.VITE_api_BASE_URL}${imagePath}`;
+  // If starts with /media
+  if (imagePath.startsWith("/media")) {
+    return `${api_BASE}${imagePath}`;
+  }
+
+  return `${api_BASE}/${imagePath}`;
 };
+  
 
   return (
     <div className="px-20 py-16 bg-gray-100">
@@ -39,6 +46,8 @@ function Furniture() {
         {products.map((product) => {
           const imagePath = product.images?.[0]?.image;
           const imageUrl = getImageUrl(imagePath);
+
+          console.log("IMAGE URL:", imageUrl);
 
           return (
             <div key={product.id} className="relative group text-center">
