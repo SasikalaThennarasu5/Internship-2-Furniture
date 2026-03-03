@@ -1,5 +1,11 @@
 function WhyChooseUs({ data, subtitle }) {
-  const api_BASE = import.meta.env.VITE_api_BASE_URL;
+
+  const iconMap = {
+    "Fast & Complimentary Shipping": "/images/whychoose1.png",
+    "Effortless Shopping Experience": "/images/whychoose2.png",
+    "Secure & Easy Payments": "/images/whychoose3.png",
+    "Seamless & Stress-Free Returns": "/images/whychoose4.png",
+  };
 
   return (
     <div className="px-20 py-20 bg-gray-100">
@@ -18,31 +24,27 @@ function WhyChooseUs({ data, subtitle }) {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {data.map((item) => {
-              const iconUrl =
-                item.icon?.startsWith("http")
-                  ? item.icon
-                  : `${api_BASE}${item.icon}`;
+            {data.map((item) => (
+              <div key={item.id} className="flex gap-4">
 
-              return (
-                <div key={item.id} className="flex gap-4">
-                  <img
-                    src={iconUrl}
-                    alt={item.title}
-                    className="h-10 w-10 object-contain"
-                  />
+                {/* LOCAL IMAGE ICON */}
+                <img
+                  src={iconMap[item.title]}
+                  alt={item.title}
+                  className="h-10 w-10 object-contain"
+                />
 
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm mt-2">
-                      {item.description}
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="font-semibold text-lg">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mt-2">
+                    {item.description}
+                  </p>
                 </div>
-              );
-            })}
+
+              </div>
+            ))}
           </div>
         </div>
 
