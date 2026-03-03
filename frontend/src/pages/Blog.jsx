@@ -16,6 +16,7 @@ function Blog() {
     "/images/blog/blog3.png",
     "/images/blog/blog4.png",
     "/images/blog/blog5.png",
+    "/images/blog/blog1.png",
   ];
 
   useEffect(() => {
