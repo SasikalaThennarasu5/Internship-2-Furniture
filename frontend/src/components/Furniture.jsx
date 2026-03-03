@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
-const api_BASE = import.meta.env.VITE_api_BASE_URL;
-
 function Furniture() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
+  const api_BASE = import.meta.env.VITE_api_BASE_URL;
+  console.log("API BASE:", api_BASE);
 
   useEffect(() => {
     api.get("products/?category=furniture")
@@ -15,7 +16,6 @@ function Furniture() {
       })
       .catch((err) => console.error(err));
   }, []);
-
   const handleAddToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(product);
@@ -24,14 +24,18 @@ function Furniture() {
   };
 
   const getImageUrl = (imagePath) => {
-    if (!imagePath) return "";
-    if (imagePath.startsWith("http")) return imagePath;
-    return `${api_BASE}${imagePath}`;
-  };
+  if (!imagePath) return "";
+
+  if (imagePath.startsWith("http")) {
+    return imagePath;
+  }
+
+  return `${import.meta.env.VITE_api_BASE_URL}${imagePath}`;
+};
 
   return (
     <div className="px-20 py-16 bg-gray-100">
-      <div className="grid grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {products.map((product) => {
           const imagePath = product.images?.[0]?.image;
           const imageUrl = getImageUrl(imagePath);
