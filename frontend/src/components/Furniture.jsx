@@ -3,16 +3,18 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 function Furniture() {
+  console.log("Furniture component loaded");
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get("products/?category=furniture")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  api.get("products/?category=furniture")
+    .then((res) => {
+      console.log("API RESPONSE:", res.data); // 👈 ADD THIS LINE
+      setProducts(res.data);
+    })
+    .catch((err) => console.error(err));
+}, []);
 
   const handleAddToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -38,10 +40,13 @@ function Furniture() {
 
                 {/* PRODUCT IMAGE */}
                 <img
-                  src={imageUrl}
-                  alt={product.name}
-                  className="mx-auto h-52 object-contain"
-                />
+  src={imageUrl}
+  alt={product.name}
+  onError={(e) => {
+    e.target.src = "/images/products/default.jpg";
+  }}
+  className="mx-auto h-52 object-contain"
+/>
 
                 <h3 className="mt-4 font-semibold">
                   {product.name}
