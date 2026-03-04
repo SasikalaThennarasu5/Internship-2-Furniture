@@ -2,22 +2,20 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
 
-  const image =
-    product.images && product.images.length > 0
-      ? product.images[0].image
-      : "";
+  const image = `/images/products/${product.slug}.jpg`;
 
   return (
     <Link to={`/product/${product.slug}`}>
       <div className="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer">
 
-        {image && (
-          <img
-            src={image}
-            alt={product.name}
-            className="w-full h-52 object-cover rounded-lg"
-          />
-        )}
+        <img
+          src={image}
+          alt={product.name}
+          onError={(e) => {
+            e.target.src = "/images/products/default.jpg";
+          }}
+          className="w-full h-52 object-contain rounded-lg"
+        />
 
         <h3 className="mt-4 text-sm font-semibold text-gray-800">
           {product.name}

@@ -63,36 +63,24 @@ function ProductDetail() {
 
         {/* LEFT SIDE - IMAGE + ZOOM */}
         <div>
-          <div
-            className="overflow-hidden rounded-xl border shadow-sm cursor-zoom-in"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            <img
-              src={selectedImage}
-              alt={product.name}
-              style={zoomStyle}
-              className="w-full h-[500px] object-cover transition-transform duration-200"
-            />
-          </div>
+  <div
+    className="overflow-hidden rounded-xl border shadow-sm cursor-zoom-in"
+    onMouseMove={handleMouseMove}
+    onMouseLeave={handleMouseLeave}
+  >
+    <img
+      src={selectedImage}
+      alt={product.name}
+      onError={(e) => {
+        e.target.src = "/images/products/default.jpg";
+      }}
+      style={zoomStyle}
+      className="w-full h-[500px] object-contain transition-transform duration-200"
+    />
+  </div>
+</div>
 
-          {/* Thumbnails */}
-          <div className="flex gap-4 mt-4">
-            {product.images?.map((img) => (
-              <img
-                key={img.id}
-                src={img.image}
-                alt=""
-                onClick={() => setSelectedImage(img.image)}
-                className={`w-20 h-20 object-cover rounded-md cursor-pointer border ${
-                  selectedImage === img.image
-                    ? "border-black"
-                    : "border-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+          
 
         {/* RIGHT SIDE - INFO */}
         <div>
