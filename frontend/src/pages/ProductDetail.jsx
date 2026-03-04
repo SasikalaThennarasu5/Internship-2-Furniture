@@ -16,24 +16,26 @@ function ProductDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get(`products/${slug}/`)
-      .then((res) => {
-        setProduct(res.data);
-        setSelectedImage(res.data.images?.[0]?.image);
+  api.get(`products/${slug}/`)
+    .then((res) => {
+      setProduct(res.data);
 
-        // Fetch related products (same category)
-        if (res.data.category?.slug) {
-          api.get(`products/?category=${res.data.category.slug}`)
-            .then((relatedRes) => {
-              const filtered = relatedRes.data.filter(
-                (item) => item.slug !== res.data.slug
-              );
-              setRelatedProducts(filtered.slice(0, 4));
-            });
-        }
-      })
-      .catch((err) => console.error(err));
-  }, [slug]);
+      // 🔥 Set image from public folder using slug
+      setSelectedImage(`/images/products/${res.data.slug}.jpg`);
+
+      // Fetch related products
+      if (res.data.category?.slug) {
+        api.get(`products/?category=${res.data.category.slug}`)
+          .then((relatedRes) => {
+            const filtered = relatedRes.data.filter(
+              (item) => item.slug !== res.data.slug
+            );
+            setRelatedProducts(filtered.slice(0, 4));
+          });
+      }
+    })
+    .catch((err) => console.error(err));
+}, [slug]);
 
   if (!product) return <p className="p-20">Loading...</p>;
 
@@ -68,15 +70,17 @@ function ProductDetail() {
     onMouseMove={handleMouseMove}
     onMouseLeave={handleMouseLeave}
   >
-    <img
-      src={selectedImage}
-      alt={product.name}
-      onError={(e) => {
-        e.target.src = "/images/products/default.jpg";
-      }}
-      style={zoomStyle}
-      className="w-full h-[500px] object-contain transition-transform duration-200"
-    />
+    {selectedImage && (
+  <img
+    src={selectedImage}
+    alt={product.name}
+    onError={(e) => {
+      e.target.src = "/images/products/default.jpg";
+    }}
+    style={zoomStyle}
+    className="w-full h-[500px] object-contain transition-transform duration-200"
+  />
+)}
   </div>
 </div>
 
