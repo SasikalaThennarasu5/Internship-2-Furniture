@@ -17,6 +17,7 @@ function Blog() {
     "/images/blog/blog4.png",
     "/images/blog/blog5.png",
     "/images/blog/blog1.png",
+    
   ];
 
   useEffect(() => {
@@ -51,10 +52,13 @@ function Blog() {
             >
 
               <img
-                src={blogImages[index]}
-                alt={blog.title}
-                className="w-full h-56 object-cover"
-              />
+  src={blogImages[index % blogImages.length]}
+  alt={blog.title}
+  onError={(e) => {
+    e.target.src = "/images/blog/blog1.png";
+  }}
+  className="w-full h-56 object-cover"
+/>
 
               <div className="p-4">
                 <h3 className="font-semibold text-lg">
