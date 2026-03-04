@@ -105,12 +105,12 @@ function Checkout() {
 <div className="mt-8 text-sm">
   <div className="flex justify-between mb-2">
     <span>Subtotal</span>
-    <span>${subtotal.toFixed(2)}</span>
+    <span>₹{subtotal.toFixed(2)}</span>
   </div>
 
   <div className="flex justify-between mb-2">
     <span>Sales tax (5%)</span>
-    <span>${tax.toFixed(2)}</span>
+    <span>₹{tax.toFixed(2)}</span>
   </div>
 
   <div className="flex justify-between mb-2">
