@@ -48,10 +48,13 @@ function Checkout() {
             >
               <div className="flex items-center gap-4">
                 <img
-                  src={item.images?.[0]?.image}
-                  alt={item.name}
-                  className="w-16 h-16 object-cover rounded"
-                />
+  src={`/images/products/${item.slug}.jpg`}
+  alt={item.name}
+  onError={(e) => {
+    e.target.src = "/images/products/default.jpg";
+  }}
+  className="w-16 h-16 object-cover rounded"
+/>
                 <div>
                   <p className="font-medium">{item.name}</p>
                   <div className="flex items-center gap-3 mt-2">
