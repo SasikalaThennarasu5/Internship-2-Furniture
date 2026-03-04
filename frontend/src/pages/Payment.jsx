@@ -55,7 +55,7 @@ console.log("Total Amount:", totalAmount);
 
     // Create order in backend
     const response = await fetch(
-      `${import.meta.env.VITE_api_BASE_URL}/payments/create-order/`,
+      "http://127.0.0.1:8000/api/payments/create-order/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,7 +82,7 @@ console.log("Total Amount:", totalAmount);
       description: "Order Payment",
       handler: async function (response) {
         await fetch(
-          `${import.meta.env.VITE_api_BASE_URL}/payments/verify-payment/`,
+          "http://127.0.0.1:8000/api/payments/verify-payment/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

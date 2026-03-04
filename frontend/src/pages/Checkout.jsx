@@ -121,7 +121,7 @@ function Checkout() {
   <div className="flex justify-between font-semibold text-lg mt-4">
     <span>Total due</span>
     <span className="text-purple-600">
-      ${total.toFixed(2)}
+      ₹{total.toFixed(2)}
     </span>
   </div>
 </div>
