@@ -28,8 +28,11 @@ function OrderSummary() {
         >
           {/* IMAGE */}
           <img
-  src={item.images?.[0]?.image}
+  src={`/images/products/${item.slug}.jpg`}
   alt={item.name}
+  onError={(e) => {
+    e.target.src = "/images/products/default.jpg";
+  }}
   className="w-16 h-16 object-cover rounded"
 />
 

@@ -12,10 +12,15 @@ function Payment() {
   const [method, setMethod] = useState("card");
 
   // Calculate total
-  const totalAmount = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce(
+  (total, item) => total + item.price * item.quantity,
+  0
+);
+
+const tax = subtotal * 0.05;
+const deliveryCharge = Number(localStorage.getItem("deliveryCharge")) || 0;
+
+const totalAmount = subtotal + tax + deliveryCharge;
 
   // Load Razorpay
   const loadRazorpay = () => {
@@ -50,7 +55,7 @@ console.log("Total Amount:", totalAmount);
 
     // Create order in backend
     const response = await fetch(
-      "http://127.0.0.1:8000/api/payments/create-order/",
+      `${import.meta.env.VITE_api_BASE_URL}/payments/create-order/`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -77,7 +82,7 @@ console.log("Total Amount:", totalAmount);
       description: "Order Payment",
       handler: async function (response) {
         await fetch(
-          "http://127.0.0.1:8000/api/payments/verify-payment/",
+          `${import.meta.env.VITE_api_BASE_URL}/payments/verify-payment/`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
