@@ -28,10 +28,10 @@ function OrderSummary() {
         >
           {/* IMAGE */}
           <img
-            src={item.images?.[0]?.image}
-            alt={item.name}
-            className="w-16 h-16 object-cover rounded"
-          />
+  src={item.images?.[0]?.image}
+  alt={item.name}
+  className="w-16 h-16 object-cover rounded"
+/>
 
           {/* NAME + QTY */}
           <div className="flex-1 ml-4">

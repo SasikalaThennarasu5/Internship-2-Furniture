@@ -109,7 +109,7 @@ function Checkout() {
   </div>
 
   <div className="flex justify-between mb-2">
-    <span>Sales tax (6.5%)</span>
+    <span>Sales tax (5%)</span>
     <span>${tax.toFixed(2)}</span>
   </div>
 
