@@ -80,51 +80,64 @@ api.get("blogs/")
 <TestimonialsSection data={testimonials} />
 
 {/* RECENT BLOGS */}
-<div className="px-20 py-24 bg-gray-100">
+const blogImages = [
+  "/images/blog/blog1.png",
+  "/images/blog/blog2.png",
+  "/images/blog/blog3.png",
+  "/images/blog/blog4.png",
+  "/images/blog/blog5.png",
+];
 
-  {/* Header Row */}
-  <div className="flex justify-between items-center mb-12">
-    <h2 className="text-4xl font-bold">
-      Recent Blog
-    </h2>
+{/* Header Row */}
+<div className="flex justify-between items-center mb-12">
+  <h2 className="text-4xl font-bold">
+    Recent Blog
+  </h2>
 
+  <Link
+    to="/blogs"
+    className="text-sm font-medium underline hover:text-gray-600 transition"
+  >
+    View All Posts
+  </Link>
+</div>
+
+{/* Blog Grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {blogs.slice(0, 3).map((blog, index) => (
     <Link
-      to="/blogs"
-      className="text-sm font-medium underline hover:text-gray-600 transition"
+      key={blog.id}
+      to={`/blog/${blog.slug}`}
+      className="border rounded-lg overflow-hidden hover:shadow-lg transition"
     >
-      View All Posts
-    </Link>
-  </div>
 
-  {/* Blog Grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-    {blogs.map((blog) => (
-      <Link
-        key={blog.id}
-        to={`/blog/${blog.slug}`}
-        className="group block"
-      >
-        {/* Image */}
-        <img
-          src={getImageUrl(blog.thumbnail)}
-          alt={blog.title}
-          className="w-full h-64 object-cover rounded-2xl mb-6 group-hover:scale-105 transition duration-300"
-        />
+      {/* Image */}
+      <img
+        src={blogImages[index % blogImages.length]}
+        alt={blog.title}
+        onError={(e) => {
+          e.target.src = "/images/blog/blog1.png";
+        }}
+        className="w-full h-56 object-cover"
+      />
 
-        {/* Title */}
-        <h3 className="font-semibold text-lg mb-2">
+      {/* Content */}
+      <div className="p-4">
+        <h3 className="font-semibold text-lg">
           {blog.title}
         </h3>
 
-        {/* Author + Date */}
-        <p className="text-sm text-gray-500">
-          by {blog.author_name} on{" "}
-          {new Date(blog.created_at).toLocaleDateString()}
+        <p className="text-gray-600 text-sm mt-2">
+          {blog.excerpt}
         </p>
-      </Link>
-    ))}
-  </div>
 
+        <p className="text-xs text-gray-400 mt-3">
+          {new Date(blog.created_at).toDateString()}
+        </p>
+      </div>
+
+    </Link>
+  ))}
 </div>
         </div>
         
