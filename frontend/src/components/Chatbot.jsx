@@ -189,33 +189,30 @@ function Chatbot() {
 
                 {/* Product Suggestions */}
                 {msg.products && (
-                  <div className="grid grid-cols-2 gap-2 mt-2">
+  <div className="grid grid-cols-2 gap-2 mt-2">
 
-                    {msg.products.map((p) => (
-                      <div
-                        key={p.id}
-                        className="border rounded p-1 text-center"
-                      >
+    {msg.products.map((p) => (
+      <div key={p.id} className="border rounded p-1 text-center">
 
-                        <img
-  src={`/images/products/${p.image || "default.jpg"}`}
-  alt={p.name}
-  className="w-full h-24 object-cover rounded"
-  onError={(e) => {
-    e.target.onerror = null;
-    e.target.src = "/images/products/default.jpg";
-  }}
-/>
+        <img
+          src={
+            p.images && p.images.length > 0
+              ? p.images[0].image
+              : "/images/products/default.jpg"
+          }
+          alt={p.name}
+          className="w-full h-24 object-cover rounded"
+        />
 
-                        <p className="text-xs mt-1 font-medium">
-                          {p.name}
-                        </p>
+        <p className="text-xs mt-1 font-medium">
+          {p.name}
+        </p>
 
-                      </div>
-                    ))}
+      </div>
+    ))}
 
-                  </div>
-                )}
+  </div>
+)}
 
               </div>
             ))}
