@@ -1,6 +1,10 @@
 from rest_framework import generics, filters
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Product
+from .utils.image_analysis import get_dominant_color
 
 
 class CategoryListView(generics.ListAPIView):
@@ -69,4 +73,46 @@ class ProductDetailView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     lookup_field = "slug"
 
+@api_view(["POST"])
+def chatbot(request):
 
+    message = request.data.get("message","").lower()
+    image = request.FILES.get("image")
+
+    reply = ""
+    products = []
+
+    if image:
+
+        color = get_dominant_color(image)
+
+        reply = f"I analyzed your room. It looks {color}. Here are furniture suggestions."
+
+        qs = Product.objects.all()[:4]
+
+    else:
+
+        if "sofa" in message:
+            reply = "Here are some sofas you might like."
+            qs = Product.objects.filter(category__name__icontains="sofa")[:4]
+
+        elif "table" in message:
+            reply = "Here are some tables."
+            qs = Product.objects.filter(category__name__icontains="table")[:4]
+
+        else:
+            reply = "Upload a room photo or ask about sofas, beds, tables."
+            qs = []
+
+    for p in qs:
+        products.append({
+            "id": p.id,
+            "name": p.name,
+            "price": p.price,
+            "slug": p.slug
+        })
+
+    return Response({
+        "reply": reply,
+        "products": products
+    })

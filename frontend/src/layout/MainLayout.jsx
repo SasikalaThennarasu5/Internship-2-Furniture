@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Chatbot from "../components/Chatbot";
 
 function MainLayout({ children }) {
   return (
@@ -12,6 +13,8 @@ function MainLayout({ children }) {
       <main className="flex-grow">
         {children}
       </main>
+
+      <Chatbot />
 
       {/* Full Width Footer */}
       <Footer />
