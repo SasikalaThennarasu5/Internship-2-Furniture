@@ -96,6 +96,8 @@ function Chatbot() {
         },
       });
 
+      console.log("Products from backend:", res.data.products);
+
       setMessages((prev) => [
         ...prev,
         {
@@ -196,16 +198,11 @@ function Chatbot() {
                       >
 
                         <img
-  src={
-    p.image
-      ? p.image.startsWith("http")
-        ? p.image
-        : `/images/products/${p.image.split("/").pop()}`
-      : "/images/products/default.jpg"
-  }
+  src={`/images/products/${p.image || "default.jpg"}`}
   alt={p.name}
   className="w-full h-24 object-cover rounded"
   onError={(e) => {
+    e.target.onerror = null;
     e.target.src = "/images/products/default.jpg";
   }}
 />
