@@ -14,6 +14,7 @@ function Chatbot() {
   const [answers, setAnswers] = useState({});
 
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleOption = (value) => {
@@ -73,8 +74,10 @@ function Chatbot() {
 
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const file = e.target.files[0];
+  setImage(file);
+  setImagePreview(URL.createObjectURL(file));
+};
 
   const sendImage = async () => {
 
@@ -174,12 +177,12 @@ function Chatbot() {
                 >
                   {msg.text}
                   {msg.image && (
-  <img
-    src={msg.image}
-    alt="Uploaded Room"
-    className="mt-2 w-full h-32 object-cover rounded"
-  />
-)}
+                    <img
+                      src={msg.image}
+                      alt="Uploaded Room"
+                      className="mt-2 w-full h-32 object-cover rounded"
+                    />
+                  )}
                 </p>
 
                 {/* Product Suggestions */}
