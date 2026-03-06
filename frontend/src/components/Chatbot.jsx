@@ -182,7 +182,11 @@ function Chatbot() {
                       >
 
                         <img
-  src={`/images/products/${p.image}`}
+  src={
+    p.image?.startsWith("http")
+      ? p.image
+      : `/images/products/${p.image}`
+  }
   alt={p.name}
   className="w-full h-24 object-cover rounded"
   onError={(e) => {
