@@ -95,7 +95,11 @@ function Chatbot() {
 
       setMessages((prev) => [
         ...prev,
-        { sender: "user", text: "Uploaded a room image 🖼️" },
+        {
+  sender: "user",
+  text: "Uploaded a room image 🖼️",
+  image: imagePreview
+},
         {
           sender: "bot",
           text: res.data.suggestion,
@@ -169,6 +173,13 @@ function Chatbot() {
                   }`}
                 >
                   {msg.text}
+                  {msg.image && (
+  <img
+    src={msg.image}
+    alt="Uploaded Room"
+    className="mt-2 w-full h-32 object-cover rounded"
+  />
+)}
                 </p>
 
                 {/* Product Suggestions */}
