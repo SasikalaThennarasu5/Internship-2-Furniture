@@ -14,10 +14,12 @@ function MainLayout({ children }) {
         {children}
       </main>
 
-      <Chatbot />
+      
 
       {/* Full Width Footer */}
       <Footer />
+
+      <Chatbot />
 
     </div>
   );

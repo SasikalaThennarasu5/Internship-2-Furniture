@@ -21,6 +21,14 @@ function Home() {
   const [whyChoose, setWhyChoose] = useState([]);
   const [blogs, setBlogs] = useState([]);
 
+const blogImages = [
+    "/images/blog/blog1.png",
+    "/images/blog/blog2.png",
+    "/images/blog/blog3.png",
+    "/images/blog/blog4.png",
+    "/images/blog/blog5.png",
+  ];
+
   useEffect(() => {
     api.get("home/")
       .then((res) => {
@@ -80,16 +88,10 @@ api.get("blogs/")
 <TestimonialsSection data={testimonials} />
 
 {/* RECENT BLOGS */}
-const blogImages = [
-  "/images/blog/blog1.png",
-  "/images/blog/blog2.png",
-  "/images/blog/blog3.png",
-  "/images/blog/blog4.png",
-  "/images/blog/blog5.png",
-];
+
 
 {/* Header Row */}
-<div className="flex justify-between items-center mb-12">
+<div className="flex justify-between items-center mb-12 mt-16">
   <h2 className="text-4xl font-bold">
     Recent Blog
   </h2>
@@ -102,16 +104,14 @@ const blogImages = [
   </Link>
 </div>
 
-{/* Blog Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {blogs.slice(0, 3).map((blog, index) => (
+  {blogs.map((blog, index) => (
     <Link
       key={blog.id}
       to={`/blog/${blog.slug}`}
       className="border rounded-lg overflow-hidden hover:shadow-lg transition"
     >
 
-      {/* Image */}
       <img
         src={blogImages[index % blogImages.length]}
         alt={blog.title}
@@ -121,7 +121,6 @@ const blogImages = [
         className="w-full h-56 object-cover"
       />
 
-      {/* Content */}
       <div className="p-4">
         <h3 className="font-semibold text-lg">
           {blog.title}
