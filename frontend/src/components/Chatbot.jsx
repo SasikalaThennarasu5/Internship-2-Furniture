@@ -195,15 +195,13 @@ function Chatbot() {
       <div key={p.id} className="border rounded p-1 text-center">
 
         <img
-          src={
-            p.images && p.images.length > 0
-              ? p.images[0].image
-              : "/images/products/default.jpg"
-          }
-          alt={p.name}
-          className="w-full h-24 object-cover rounded"
-        />
-
+  src={`/images/products/${p.slug}.jpg`}
+  alt={p.name}
+  className="w-full h-24 object-cover rounded"
+  onError={(e) => {
+    e.target.src = "/images/products/default.jpg";
+  }}
+/>
         <p className="text-xs mt-1 font-medium">
           {p.name}
         </p>
